@@ -28,3 +28,9 @@ either single or double quote characters for string literals. What is more
 important is that you remain consistent. This checker allows you to specify
 (via the `expected-string-literal-quote` option) whether to use single or
 double quote characters for string literals.
+
+### String concatenation
+
+String substituion is often recommended over string concatenation. This checker
+will find string concatenation operations that contains at least one string
+literal.
