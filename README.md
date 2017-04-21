@@ -31,6 +31,6 @@ double quote characters for string literals.
 
 ### String concatenation
 
-String substituion is often recommended over string concatenation. This checker
+String substitution is often recommended over string concatenation. This checker
 will find string concatenation operations that contains at least one string
 literal.
