@@ -72,13 +72,12 @@ class LiteralQuoteChecker(BaseTokenChecker):
         # Check triple-quote strings
         if len(after_prefix) >= 3 and after_prefix[:3] in TRIPLE_QUOTES:
             if after_prefix[:3] != expected_triple_quotes:
-                self.add_message('incorrect-triple-quotes',
-                                 line=start_row,
-                                 args=(expected_triple_quotes, after_prefix[:3]))
+                self.add_message('incorrect-triple-quotes', line=start_row,
+                                 args=(expected_triple_quotes,
+                                       after_prefix[:3]))
         # Check single quote strings
         elif after_prefix[0] != expected_quote_char:
-            self.add_message('incorrect-string-literal-quote',
-                             line=start_row,
+            self.add_message('incorrect-string-literal-quote', line=start_row,
                              args=(expected_quote_char, after_prefix[0]))
 
 
@@ -105,8 +104,7 @@ class StringConcatChecker(BaseChecker):
         left = node.left
         if (isinstance(left, astroid.Const) and
                 isinstance(left.value, six.string_types)):
-            self.add_message('string-concat',
-                             node=node)
+            self.add_message('string-concat', node=node)
 
 
 def register(linter):
