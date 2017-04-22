@@ -81,6 +81,15 @@ class LiteralQuoteChecker(BaseTokenChecker):
                              args=(expected_quote_char, after_prefix[0]))
 
 
+def _is_concat(child):
+    """
+    Returns ``True`` if the node child is part of a string concatenation
+    operation.
+    """
+    return isinstance(child, astroid.Const) and isinstance(child.value,
+                                                           six.string_types)
+
+
 class StringConcatChecker(BaseChecker):
     """
     Look for string concatenation operations.
@@ -101,9 +110,9 @@ class StringConcatChecker(BaseChecker):
         if node.op != '+':
             return
 
-        left = node.left
-        if (isinstance(left, astroid.Const) and
-                isinstance(left.value, six.string_types)):
+        if _is_concat(node.left):
+            self.add_message('string-concat', node=node)
+        elif _is_concat(node.right):
             self.add_message('string-concat', node=node)
 
 
